@@ -26,12 +26,13 @@ public class SenderActivity extends AppCompatActivity {
         txtBody = findViewById(R.id.txtBody);
     }
 
-    public void Buttontapped(View view ) {
+    public void Buttontapped(View view) {
         body = txtBody.getText().toString();
         if( body.equals("")){
             builder= new AlertDialog.Builder(this);
             builder.setTitle("Error");
             builder.setMessage("Pleas Fill Body");
+            builder.setCancelable(true);
             builder.show();
         }else {
             Adress=txtAdress.getText().toString();
@@ -41,7 +42,8 @@ public class SenderActivity extends AppCompatActivity {
             intent.putExtra(Intent.EXTRA_EMAIL,Adress);
             intent.putExtra(Intent.EXTRA_SUBJECT,Subject);
             intent.putExtra(Intent.EXTRA_TEXT,body);
-            startActivity(Intent.createChooser( intent , "Choose an Email client :"));
+            intent.setClassName("com.google.android.gm", "com.google.android.gm.ConversationListActivity");
+            startActivity(intent);
 
         }
     }
